@@ -6,14 +6,16 @@ const MemberAuth = () => {
   const [signUpRender, setSignUpRender] = useState(false);
   console.log(signUpRender);
   return (
-    <div>
+    <section className="flex flex-col items-center">
       TODO 유효성 검사 필요
-      {signUpRender ? (
+      {/* {signUpRender ? (
         <SignUp setSignUpRender={setSignUpRender} />
       ) : (
         <Login setSignUpRender={setSignUpRender} />
-      )}
-    </div>
+      )} */}
+      <Login />
+      <SignUp />
+    </section>
   );
 };
 

@@ -25,7 +25,7 @@ const ReportList = () => {
           )
           .map((data) => (
             <Link
-              to={`details/${data.id}`}
+              to={`/details/${data.id}`}
               key={data.id}
               style={{
                 textDecoration: "none",

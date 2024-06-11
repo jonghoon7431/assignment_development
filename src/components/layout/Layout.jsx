@@ -1,10 +1,15 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 import styled from "styled-components";
+import Header from "./Header";
 
-function Layout({ children }) {
+function Layout() {
   return (
     <StBackground>
-      <StMain>{children}</StMain>
+      <Header />
+      <StMain>
+        <Outlet />
+      </StMain>
     </StBackground>
   );
 }
@@ -13,7 +18,6 @@ export default Layout;
 
 const StBackground = styled.div`
   position: fixed;
-  background-color: var(--blue);
   width: 100%;
   height: 100vh;
   overflow: auto;
