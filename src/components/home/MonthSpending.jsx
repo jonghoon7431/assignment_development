@@ -1,14 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { Section } from "../pages/Home";
+import { Section } from "../../pages/Home";
 
 const MonthSpending = () => {
   const activeMonth = useSelector((state) => state.activeMonth);
   const data = useSelector((state) => state.data);
 
   //월 총액 계산
-  const month = data.filter((data) => data.date.split("-")[1].includes(activeMonth));
+  const month = data.filter((data) =>
+    data.date.split("-")[1].includes(activeMonth)
+  );
 
   let totalAmount = 0;
   month.forEach((e) => (totalAmount += Number(e.amount)));

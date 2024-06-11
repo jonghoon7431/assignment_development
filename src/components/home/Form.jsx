@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
-import { addFormData } from "../redux/slices/formSlice";
+import { addFormData } from "../../redux/slices/formSlice";
 
 const Form = () => {
   const dispatch = useDispatch();

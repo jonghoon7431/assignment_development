@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { Section } from "../pages/Home";
-import { getMonth } from "../redux/slices/MonthSlice";
+import { Section } from "../../pages/Home";
+import { getMonth } from "../../redux/slices/MonthSlice";
 
 const ChoiceMonth = () => {
   const dispatch = useDispatch();
@@ -26,7 +26,11 @@ const ChoiceMonth = () => {
     <Section>
       <ChoiceMonthButtonContainer>
         {month.map((month) => (
-          <MonthButton key={month} $active={activeMonth === month} onClick={() => handleClick(month)}>
+          <MonthButton
+            key={month}
+            $active={activeMonth === month}
+            onClick={() => handleClick(month)}
+          >
             {month}월
           </MonthButton>
         ))}

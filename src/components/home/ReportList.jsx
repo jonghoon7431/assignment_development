@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Section } from "../pages/Home";
+import { Section } from "../../pages/Home";
 
 const ReportList = () => {
   const data = useSelector((state) => state.data);
@@ -20,7 +20,9 @@ const ReportList = () => {
       </H2>
       <ReportListUl>
         {data
-          .filter((prevData) => Number(prevData.date.split("-")[1]) === activeMonth)
+          .filter(
+            (prevData) => Number(prevData.date.split("-")[1]) === activeMonth
+          )
           .map((data) => (
             <Link
               to={`details/${data.id}`}
