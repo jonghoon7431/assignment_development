@@ -1,5 +1,6 @@
 import { Provider } from "react-redux";
 import GlobalStyle from "./components/GlobalStyle";
+import "./index.css";
 import store from "./redux/config/configStore";
 import Router from "./shared/Router";
 
