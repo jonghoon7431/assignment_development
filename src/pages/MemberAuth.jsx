@@ -13,8 +13,8 @@ const MemberAuth = () => {
       ) : (
         <Login setSignUpRender={setSignUpRender} />
       )} */}
-      <Login />
-      <SignUp />
+      <Login setSignUpRender={setSignUpRender} />
+      <SignUp setSignUpRender={setSignUpRender} />
     </section>
   );
 };
