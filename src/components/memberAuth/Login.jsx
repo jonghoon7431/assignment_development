@@ -23,6 +23,7 @@ const Login = ({ setSignUpRender }) => {
     );
     const data = response.data;
     if (data.success) {
+      // TODO fix- 로그아웃 후, 다시 시도할 때 login is not a function error
       login(data.accessToken);
       navigate("/home");
     } else {
