@@ -1,35 +1,23 @@
-import axios from "axios";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { login } from "../../api/auth";
 import useInput from "../../hooks/useInput";
 import { Section } from "../../pages/Home";
-import useBearsStore from "../../zustand/bearsStore";
+// import { getUserInfo } from "../../redux/slices/userSlice";
 
 const Login = ({ setSignUpRender }) => {
   const [id, onChangeIdHandler] = useInput("");
   const [password, onChangePasswordHandler] = useInput("");
-  const login = useBearsStore((state) => state.login);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(id);
-    const response = await axios.post(
-      "https://moneyfulpublicpolicy.co.kr/login",
-      {
-        id,
-        password,
-      }
-    );
-    const data = response.data;
-    if (data.success) {
-      // TODO fix- 로그아웃 후, 다시 시도할 때 login is not a function error
-      login(data.accessToken);
-      navigate("/home");
-    } else {
-      // TODO 로그인 실패 원인에 따른 alert 띄우기
-      alert("로그인 실패");
-    }
+
+    const data = await login({ id, password });
+
+    navigate("/home");
   };
 
   return (
@@ -42,13 +30,17 @@ const Login = ({ setSignUpRender }) => {
           type="text"
           value={id}
           onChange={onChangeIdHandler}
+          minLength="4"
+          maxLength="10"
         />
         <label>비밀번호</label>
         <input
           className="mb-6 border-b-2"
-          type="text"
+          type="password"
           value={password}
           onChange={onChangePasswordHandler}
+          minLength="4"
+          maxLength="15"
         />
         <button className="border-2 p-2">로그인</button>
         {/* TODO p-호버효과, 커서 포인터 */}

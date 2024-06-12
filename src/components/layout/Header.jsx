@@ -12,7 +12,7 @@ const Header = () => {
       <div className="flex gap-4 items-center mr-6">
         {/* TODO: 프로밀 이미지 들어갈 부분 */}
         <p>닉네임</p>
-        <button onClick={() => navigate("/")}>로그아웃</button>
+        <button>로그아웃</button>
       </div>
     </header>
   );

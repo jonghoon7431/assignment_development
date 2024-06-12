@@ -1,5 +1,5 @@
-import axios from "axios";
 import React from "react";
+import { register } from "../../api/auth";
 import useInput from "../../hooks/useInput";
 import { Section } from "../../pages/Home";
 
@@ -12,19 +12,15 @@ const SignUp = ({ setSignUpRender }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // TODO 비밀번호, 비밀번호 확인 일치하지 않으면 return alert
+    if (password !== checkPassword)
+      return alert(
+        "비밀번호와 비밀번호 확인이 일치하지 않습니다. 다시 입력해주세요"
+      );
 
-    const response = await axios.post(
-      "https://moneyfulpublicpolicy.co.kr/register",
-      { id, password, nickname }
-    );
-    const data = response.data;
-    if (data.success) {
+    const data = await register({ id, password, nickname });
+    if (data) {
+      alert("회원가입이 완료되었습니다");
       setSignUpRender(false);
-    } else {
-      // TODO어떤 오류때문인지 파악 후 alert으로 알려주는 법 찾기
-      // TODO try...catch 구문의 이점, 효과적으로 사용할 방법 찾아보기
-      alert("회원가입 실패");
     }
   };
   return (
@@ -37,6 +33,8 @@ const SignUp = ({ setSignUpRender }) => {
           type="text"
           value={id}
           onChange={onChangeIdHandler}
+          minLength="4"
+          maxLength="10"
         />
         <label>비밀번호</label>
         <input
@@ -44,6 +42,8 @@ const SignUp = ({ setSignUpRender }) => {
           type="password"
           value={password}
           onChange={onChangePasswordHandler}
+          minLength="4"
+          maxLength="15"
         />
         <label>비밀번호 확인</label>
         <input
@@ -51,6 +51,8 @@ const SignUp = ({ setSignUpRender }) => {
           type="password"
           value={checkPassword}
           onChange={onChangeCheckPasswordHandler}
+          minLength="4"
+          maxLength="15"
         />
         <label>닉네임</label>
         <input
@@ -58,6 +60,8 @@ const SignUp = ({ setSignUpRender }) => {
           type="text"
           value={nickname}
           onChange={onChangeNicknameHandler}
+          minLength="1"
+          maxLength="10"
         />
         <button className="border-2 p-2">회원가입</button>
         <div className="flex flex-row">

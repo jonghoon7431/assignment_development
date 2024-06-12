@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const MonthSlice = createSlice({
+const monthSlice = createSlice({
   name: "activeMonth",
-  initialState: localStorage.getItem("month") ? parseInt(localStorage.getItem("month")) : 1,
+  initialState: localStorage.getItem("month")
+    ? parseInt(localStorage.getItem("month"))
+    : 1,
   reducers: {
     getMonth: (state, action) => {
       return action.payload;
@@ -10,5 +12,5 @@ const MonthSlice = createSlice({
   },
 });
 
-export const { getMonth } = MonthSlice.actions;
-export default MonthSlice.reducer;
+export const { getMonth } = monthSlice.actions;
+export default monthSlice.reducer;

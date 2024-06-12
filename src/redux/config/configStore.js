@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import MonthSlice from "../slices/MonthSlice";
 import formSlice from "../slices/formSlice";
+import MonthSlice from "../slices/monthSlice";
 
 const store = configureStore({
   reducer: {

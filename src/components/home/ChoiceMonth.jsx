@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Section } from "../../pages/Home";
-import { getMonth } from "../../redux/slices/MonthSlice";
+import { getMonth } from "../../redux/slices/monthSlice";
 
 const ChoiceMonth = () => {
   const dispatch = useDispatch();
