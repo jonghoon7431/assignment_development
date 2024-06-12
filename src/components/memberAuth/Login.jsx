@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { login } from "../../api/auth";
 import useInput from "../../hooks/useInput";
 import { Section } from "../../pages/Home";
-// import { getUserInfo } from "../../redux/slices/userSlice";
 
 const Login = ({ setSignUpRender }) => {
   const [id, onChangeIdHandler] = useInput("");
@@ -14,10 +13,10 @@ const Login = ({ setSignUpRender }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    await login({ id, password });
 
-    const data = await login({ id, password });
-
-    navigate("/home");
+    alert("로그인 완료");
+    navigate("/");
   };
 
   return (

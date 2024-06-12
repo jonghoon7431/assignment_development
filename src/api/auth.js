@@ -1,12 +1,11 @@
 import axios from "axios";
 
-const AUTH_API_URL = "https://moneyfulpublicpolicy.co.kr";
+export const AUTH_API_URL = "https://moneyfulpublicpolicy.co.kr";
 
 export const authApi = axios.create({
   baseURL: "https://moneyfulpublicpolicy.co.kr",
 });
 
-//인자 : 받아와야 할 요소들 넣기
 export const register = async ({ id, password, nickname }) => {
   try {
     const response = await axios.post(`${AUTH_API_URL}/register`, {
@@ -37,16 +36,18 @@ export const login = async ({ id, password }) => {
 export const getUser = async () => {
   const accessToken = localStorage.getItem("accessToken");
 
-  if (!accessToken) return;
-  try {
-    const response = await axios.get(`${AUTH_API_URL}/user`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+  if (accessToken) {
+    try {
+      const response = await axios.get(`${AUTH_API_URL}/user`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
 
-    return response.data;
-  } catch (error) {
-    alert(error?.response?.data?.message);
+      return response.data;
+    } catch (error) {
+      alert("토근이 만료되었습니다 다시 로그인 해주세요");
+      localStorage.clear;
+    }
   }
 };

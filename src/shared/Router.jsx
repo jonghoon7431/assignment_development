@@ -4,6 +4,7 @@ import Layout from "../components/layout/Layout";
 import Details from "../pages/Details";
 import Home from "../pages/Home";
 import MemberAuth from "../pages/MemberAuth";
+import MyPage from "../pages/MyPage";
 
 const PrivateRoute = ({ element: Element, ...rest }) => {
   //TODO 로그인 정보를 받아서, 로그인 되어있지 않으면 로그인으로 리다이렉트
@@ -19,17 +20,21 @@ const router = createBrowserRouter(
 
       children: [
         {
-          path: "/home",
+          path: "/",
           element: <Home />,
         },
         {
           path: "/details/:id",
           element: <Details />,
         },
+        {
+          path: "/my_page",
+          element: <MyPage />,
+        },
       ],
     },
     {
-      path: "/",
+      path: "/sign_in",
       element: <MemberAuth />,
     },
   ],

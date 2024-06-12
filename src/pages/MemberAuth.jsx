@@ -4,7 +4,7 @@ import SignUp from "../components/memberAuth/SignUp";
 
 const MemberAuth = () => {
   const [signUpRender, setSignUpRender] = useState(false);
-  console.log(signUpRender);
+
   return (
     <section className="flex flex-col items-center">
       {signUpRender ? (
