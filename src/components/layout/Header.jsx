@@ -7,7 +7,7 @@ const Header = () => {
     <header className="bg-sky-900 h-[7vh] flex justify-between text-white mb-4">
       <div className="flex gap-4 ml-6">
         <button onClick={() => navigate("/home")}>HOME</button>
-        <button>내 프로필</button>
+        <button>마이페이지</button>
       </div>
       <div className="flex gap-4 items-center mr-6">
         {/* TODO: 프로밀 이미지 들어갈 부분 */}
