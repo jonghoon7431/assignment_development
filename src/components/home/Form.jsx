@@ -1,12 +1,22 @@
 import { useMutation } from "@tanstack/react-query";
 import React from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
+import { queryClient } from "../../QueryClientSetUp";
 import { postExpense } from "../../api/expense";
 
 const Form = () => {
-  const mutation = useMutation({ mutationFn: postExpense });
+  const navigate = useNavigate();
+
+  const mutation = useMutation({
+    mutationFn: postExpense,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["expenses"]);
+      navigate(0);
+    },
+  });
   const userId = useSelector((state) => state.user.id);
 
   const onSubmit = (e) => {

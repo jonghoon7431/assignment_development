@@ -1,7 +1,7 @@
 //tastack query provider 생성
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 const QueryClientSetUp = ({ children }) => {
   return (

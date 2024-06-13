@@ -78,6 +78,14 @@
       "amount": "10000",
       "description": "test2",
       "createdBy": "qwer"
+    },
+    {
+      "id": "80d025a5-8dae-467e-96bc-867793d92ed8",
+      "date": "2024-01-30",
+      "item": "test",
+      "amount": "1000",
+      "description": "test",
+      "createdBy": "qwer"
     }
   ]
 }
