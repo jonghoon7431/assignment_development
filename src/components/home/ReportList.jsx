@@ -1,12 +1,25 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { getExpenses } from "../../api/expense";
 import { Section } from "../../pages/Home";
 
 const ReportList = () => {
-  const data = useSelector((state) => state.data);
+  // const expenseData = useSelector((state) => state.data);
+
+  const {
+    data: expenses = [],
+    isLoading,
+    error,
+  } = useQuery({ queryKey: ["expenses"], queryFn: getExpenses });
+
   const activeMonth = useSelector((state) => state.activeMonth);
+
+  if (isLoading) {
+    return <div>로딩중 ...</div>;
+  }
 
   return (
     <Section>
@@ -19,7 +32,7 @@ const ReportList = () => {
         내역
       </H2>
       <ReportListUl>
-        {data
+        {expenses
           .filter(
             (prevData) => Number(prevData.date.split("-")[1]) === activeMonth
           )
@@ -43,7 +56,7 @@ const ReportList = () => {
                       fontWeight: "bold",
                     }}
                   >
-                    {data.amount.toLocaleString()}원
+                    {data.amount}원
                   </p>
                 </AmountWrap>
               </List>

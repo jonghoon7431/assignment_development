@@ -48,7 +48,7 @@
     {
       "id": "d180194f-7c27-428a-8cd9-ad9114e58821",
       "month": 1,
-      "date": "2024-01-22",
+      "date": "2024-02-22",
       "item": "도서",
       "amount": 23000,
       "description": "리액트 마스터",
@@ -57,11 +57,27 @@
     {
       "id": "0abf06c3-8f0e-4ea1-9691-7facab0a91cb",
       "month": 1,
-      "date": "2024-01-30",
+      "date": "2024-02-30",
       "item": "외식",
       "amount": 100000,
       "description": "세광양대창",
       "createdBy": "Me"
+    },
+    {
+      "id": "59e9b82b-baa7-4853-9da6-5653985ddc0a",
+      "date": "2024-06-14",
+      "item": "test",
+      "amount": "5000",
+      "description": "test",
+      "createdBy": "qwer"
+    },
+    {
+      "id": "047881c2-d938-4202-b4bb-d2ce0706cda0",
+      "date": "2024-06-18",
+      "item": "test2",
+      "amount": "10000",
+      "description": "test2",
+      "createdBy": "qwer"
     }
   ]
 }

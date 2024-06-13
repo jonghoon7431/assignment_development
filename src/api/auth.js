@@ -23,7 +23,7 @@ export const register = async ({ id, password, nickname }) => {
 
 export const login = async ({ id, password }) => {
   try {
-    const response = await axios.post(`${AUTH_API_URL}/login?expiresIn=10m`, {
+    const response = await axios.post(`${AUTH_API_URL}/login?expiresIn=30m`, {
       id,
       password,
     });

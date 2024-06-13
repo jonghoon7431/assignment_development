@@ -1,11 +1,14 @@
+import { useMutation } from "@tanstack/react-query";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
-import { addFormData } from "../../redux/slices/formSlice";
+import { postExpense } from "../../api/expense";
 
 const Form = () => {
-  const dispatch = useDispatch();
+  const mutation = useMutation({ mutationFn: postExpense });
+  const userId = useSelector((state) => state.user.id);
+
   const onSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -23,7 +26,17 @@ const Form = () => {
     //금액이 음수나 0일 경우
     if (amount <= 0) return alert("입력 금액이 올바른지 확인해주세요");
 
-    dispatch(addFormData({ id: uuidv4(), date, item, amount, description }));
+    const newExpense = {
+      id: uuidv4(),
+      date,
+      item,
+      amount,
+      description,
+      createdBy: userId,
+    };
+
+    mutation.mutate(newExpense);
+
     e.target.reset();
   };
   return (
