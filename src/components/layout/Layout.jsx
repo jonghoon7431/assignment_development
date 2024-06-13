@@ -8,6 +8,10 @@ import Header from "./Header";
 
 function Layout() {
   const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.user);
+  console.log(user);
+
   //로그인 된 정보 redux로 보내기
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -16,9 +20,6 @@ function Layout() {
     };
     fetchUserInfo();
   }, []);
-
-  const user = useSelector((state) => state.user);
-  console.log(user);
 
   return (
     <StBackground>

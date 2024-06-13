@@ -18,7 +18,11 @@ const Header = () => {
         <button onClick={() => navigate("/my_page")}>마이페이지</button>
       </div>
       <div className="flex gap-4 items-center mr-6">
-        <img src={avatar} alt="user profile" />
+        <img
+          className="w-10 h-10 rounded-full"
+          src={avatar}
+          alt="user profile"
+        />
         <p>{nickname}</p>
         <button onClick={handleLogout}>로그아웃</button>
       </div>
