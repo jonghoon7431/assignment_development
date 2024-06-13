@@ -1,16 +1,19 @@
 import React from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import Details from "../pages/Details";
 import Home from "../pages/Home";
 import MemberAuth from "../pages/MemberAuth";
 import MyPage from "../pages/MyPage";
 
-const PrivateRoute = ({ element: Element, ...rest }) => {
-  //TODO 로그인 정보를 받아서, 로그인 되어있지 않으면 로그인으로 리다이렉트
+const PrivateRoute = ({ element }) => {
+  const isLogin = useSelector((state) => state.user.success);
+  return isLogin ? element : <Navigate to="/sign_in" />;
 };
-const PublicRoute = ({ element: Element, ...rest }) => {
-  //TODO 로그인 정보 가져와서 , 로그인 된 사용자는 마이페이지로 리다이렉트
+const PublicRoute = ({ element }) => {
+  const isLogin = useSelector((state) => state.user.success);
+  return isLogin ? <Navigate to="/" /> : element;
 };
 
 const router = createBrowserRouter(
@@ -21,21 +24,21 @@ const router = createBrowserRouter(
       children: [
         {
           path: "/",
-          element: <Home />,
+          element: <PrivateRoute element={<Home />} />,
         },
         {
           path: "/details/:id",
-          element: <Details />,
+          element: <PrivateRoute element={<Details />} />,
         },
         {
           path: "/my_page",
-          element: <MyPage />,
+          element: <PrivateRoute element={<MyPage />} />,
         },
       ],
     },
     {
       path: "/sign_in",
-      element: <MemberAuth />,
+      element: <PublicRoute element={<MemberAuth />} />,
     },
   ],
   {

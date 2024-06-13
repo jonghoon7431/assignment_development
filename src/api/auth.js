@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 export const AUTH_API_URL = "https://moneyfulpublicpolicy.co.kr";
 
@@ -47,7 +48,8 @@ export const getUser = async () => {
       return response.data;
     } catch (error) {
       alert("토근이 만료되었습니다 다시 로그인 해주세요");
-      localStorage.clear;
+      localStorage.clear();
+      Navigate("/sign_in");
     }
   }
 };
