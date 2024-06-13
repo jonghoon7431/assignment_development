@@ -1,17 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { getExpenses } from "../../api/expense";
+import useExpense from "../../hooks/useExpense";
 import { Section } from "../../pages/Home";
 
 const MonthSpending = () => {
   const activeMonth = useSelector((state) => state.activeMonth);
-
-  const { data: expenses = [] } = useQuery({
-    queryKey: ["expenses"],
-    queryFn: getExpenses,
-  });
+  const { expenses } = useExpense();
 
   //월 총액 계산
   const month = expenses.filter((data) =>

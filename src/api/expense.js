@@ -17,7 +17,9 @@ export const getExpense = async ({ queryKey }) => {
   try {
     const response = await axios.get(`${JSON_SERVER_URL}/expenses/${id}`);
     return response.data;
-  } catch (error) {}
+  } catch (error) {
+    alert("비상 비상 문제 발생 ~! 해당 데이터 부를 수 없음 ~");
+  }
 };
 //추가
 export const postExpense = async (newExpense) => {

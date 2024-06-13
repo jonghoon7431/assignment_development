@@ -44,7 +44,6 @@ const Details = () => {
     mutationFn: deleteExpense,
     onSuccess: () => {
       navigate("/");
-      queryClient.invalidateQueries(["expenses"]);
     },
   });
 

@@ -1,18 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { getExpenses } from "../../api/expense";
+import useExpense from "../../hooks/useExpense";
 import { Section } from "../../pages/Home";
 
 const ReportList = () => {
-  const {
-    data: expenses = [],
-    isLoading,
-    error,
-  } = useQuery({ queryKey: ["expenses"], queryFn: getExpenses });
-
+  const { expenses, isLoading } = useExpense();
   const activeMonth = useSelector((state) => state.activeMonth);
 
   if (isLoading) {
@@ -75,7 +69,6 @@ const ReportListUl = styled.ul`
   flex-direction: column;
 `;
 const List = styled.li`
-  height: 6vh;
   border: 1px solid var(--light-blue);
   border-radius: 10px;
   margin: 10px;

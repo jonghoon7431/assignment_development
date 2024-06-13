@@ -1,23 +1,6 @@
 {
   "expenses": [
     {
-      "date": "2024-01-17",
-      "item": "식비",
-      "amount": 21000,
-      "description": "왜자꾸크리에이티드바이사라지는아;ㅆ",
-      "createdBy": "qwer",
-      "id": "9aba6d72-5ee7-4f02-a4d4-e8bbff9ded4b"
-    },
-    {
-      "id": "b82b213e-8164-4c89-94b0-7246cdcfc4f9",
-      "month": 1,
-      "date": "2024-01-21",
-      "item": "식비",
-      "amount": 412000,
-      "description": "BBQ",
-      "createdBy": "Me"
-    },
-    {
       "id": "d180194f-7c27-428a-8cd9-ad9114e58821",
       "month": 1,
       "date": "2024-02-22",
@@ -41,6 +24,14 @@
       "item": "test",
       "amount": "1000",
       "description": "test",
+      "createdBy": "qwer"
+    },
+    {
+      "id": "259b5e55-9725-4021-996e-4fd8591e99c2",
+      "date": "2024-01-13",
+      "item": "진짜 ㅋㅋ",
+      "amount": "100000000",
+      "description": "얼탱이없네 ㅋㅋ",
       "createdBy": "qwer"
     }
   ]
