@@ -13,8 +13,8 @@ const Form = () => {
   const mutation = useMutation({
     mutationFn: postExpense,
     onSuccess: () => {
-      queryClient.invalidateQueries(["expenses"]);
       navigate(0);
+      queryClient.invalidateQueries(["expenses"]);
     },
   });
   const userId = useSelector((state) => state.user.id);

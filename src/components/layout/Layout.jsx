@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import { getUser } from "../../api/auth";
 import { getUserInfo } from "../../redux/slices/userSlice";
@@ -8,12 +8,7 @@ import Header from "./Header";
 
 function Layout() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const user = useSelector((state) => state.user);
-  const isLogin = user.success;
-
-  console.log(user);
 
   //로그인 된 정보 redux로 보내기
   useEffect(() => {

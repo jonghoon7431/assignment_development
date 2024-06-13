@@ -8,7 +8,6 @@ import MonthSpending from "../components/home/MonthSpending";
 import ReportList from "../components/home/ReportList";
 
 export default function Home() {
-  //TODO 캐싱 해야될듯 콘솔 6번씩뜸
   const isLogin = useSelector((state) => state.user.success);
   useEffect(() => {
     if (!isLogin) {

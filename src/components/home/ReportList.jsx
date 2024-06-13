@@ -7,8 +7,6 @@ import { getExpenses } from "../../api/expense";
 import { Section } from "../../pages/Home";
 
 const ReportList = () => {
-  // const expenseData = useSelector((state) => state.data);
-
   const {
     data: expenses = [],
     isLoading,

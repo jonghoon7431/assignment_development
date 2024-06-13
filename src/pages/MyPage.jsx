@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { updateProfile } from "../api/auth";
 import useInput from "../hooks/useInput";
 import { Section } from "./Home";
 
 const MyPage = () => {
-  const navigate = useNavigate();
-
   const [nickname, onChangeNicknameHandler] = useInput("");
   const [avatar, setAvatar] = useState(null);
 
