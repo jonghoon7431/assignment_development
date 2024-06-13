@@ -12,6 +12,9 @@ ${reset}
 *{
   user-select: none;
 }
+body{
+  background-color: var(--blue);
+}
 `;
 
 export default GlobalStyle;

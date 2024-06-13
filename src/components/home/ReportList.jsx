@@ -2,11 +2,16 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Section } from "../pages/Home";
+import useExpense from "../../hooks/useExpense";
+import { Section } from "../../pages/Home";
 
 const ReportList = () => {
-  const data = useSelector((state) => state.data);
+  const { expenses, isLoading } = useExpense();
   const activeMonth = useSelector((state) => state.activeMonth);
+
+  if (isLoading) {
+    return <div>로딩중 ...</div>;
+  }
 
   return (
     <Section>
@@ -19,11 +24,13 @@ const ReportList = () => {
         내역
       </H2>
       <ReportListUl>
-        {data
-          .filter((prevData) => Number(prevData.date.split("-")[1]) === activeMonth)
+        {expenses
+          .filter(
+            (prevData) => Number(prevData.date.split("-")[1]) === activeMonth
+          )
           .map((data) => (
             <Link
-              to={`details/${data.id}`}
+              to={`/details/${data.id}`}
               key={data.id}
               style={{
                 textDecoration: "none",
@@ -41,7 +48,7 @@ const ReportList = () => {
                       fontWeight: "bold",
                     }}
                   >
-                    {data.amount.toLocaleString()}원
+                    {data.amount}원
                   </p>
                 </AmountWrap>
               </List>
@@ -62,7 +69,6 @@ const ReportListUl = styled.ul`
   flex-direction: column;
 `;
 const List = styled.li`
-  height: 6vh;
   border: 1px solid var(--light-blue);
   border-radius: 10px;
   margin: 10px;

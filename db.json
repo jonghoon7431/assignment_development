@@ -1,0 +1,38 @@
+{
+  "expenses": [
+    {
+      "id": "d180194f-7c27-428a-8cd9-ad9114e58821",
+      "month": 1,
+      "date": "2024-02-22",
+      "item": "도서",
+      "amount": 23000,
+      "description": "리액트 마스터",
+      "createdBy": "Me"
+    },
+    {
+      "id": "0abf06c3-8f0e-4ea1-9691-7facab0a91cb",
+      "month": 1,
+      "date": "2024-02-30",
+      "item": "외식",
+      "amount": 100000,
+      "description": "세광양대창",
+      "createdBy": "Me"
+    },
+    {
+      "id": "80d025a5-8dae-467e-96bc-867793d92ed8",
+      "date": "2024-01-30",
+      "item": "test",
+      "amount": "1000",
+      "description": "test",
+      "createdBy": "qwer"
+    },
+    {
+      "id": "259b5e55-9725-4021-996e-4fd8591e99c2",
+      "date": "2024-01-13",
+      "item": "진짜 ㅋㅋ",
+      "amount": "100000000",
+      "description": "얼탱이없네 ㅋㅋ",
+      "createdBy": "qwer"
+    }
+  ]
+}

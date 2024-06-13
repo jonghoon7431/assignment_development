@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import ChoiceMonth from "../components/ChoiceMonth";
-import Container from "../components/Container";
-import Form from "../components/Form";
-import MonthSpending from "../components/MonthSpending";
-import ReportList from "../components/ReportList";
+import ChoiceMonth from "../components/home/ChoiceMonth";
+import Container from "../components/home/Container";
+import Form from "../components/home/Form";
+import MonthSpending from "../components/home/MonthSpending";
+import ReportList from "../components/home/ReportList";
 
-export default function () {
+export default function Home() {
+  const isLogin = useSelector((state) => state.user.success);
+  useEffect(() => {
+    if (!isLogin) {
+      navigate("/sign_in");
+    }
+  }, [isLogin]);
+
   return (
     <Container>
       <Form />

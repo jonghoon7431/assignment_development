@@ -1,20 +1,49 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Layout from "../components/Layout";
+import { useSelector } from "react-redux";
+import { Navigate, createBrowserRouter } from "react-router-dom";
+import Layout from "../components/layout/Layout";
 import Details from "../pages/Details";
 import Home from "../pages/Home";
+import MemberAuth from "../pages/MemberAuth";
+import MyPage from "../pages/MyPage";
 
-const Router = () => {
-  return (
-    <BrowserRouter basename="/assignment_expense_report/">
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/details/:id" element={<Details />} />
-        </Routes>
-      </Layout>
-    </BrowserRouter>
-  );
+const PrivateRoute = ({ element }) => {
+  const isLogin = useSelector((state) => state.user.success);
+  return isLogin ? element : <Navigate to="/sign_in" />;
+};
+const PublicRoute = ({ element }) => {
+  const isLogin = useSelector((state) => state.user.success);
+  return isLogin ? <Navigate to="/" /> : element;
 };
 
-export default Router;
+const router = createBrowserRouter(
+  [
+    {
+      element: <Layout />,
+
+      children: [
+        {
+          path: "/",
+          element: <PrivateRoute element={<Home />} />,
+        },
+        {
+          path: "/details/:id",
+          element: <PrivateRoute element={<Details />} />,
+        },
+        {
+          path: "/my_page",
+          element: <PrivateRoute element={<MyPage />} />,
+        },
+      ],
+    },
+    {
+      path: "/sign_in",
+      element: <PublicRoute element={<MemberAuth />} />,
+    },
+  ],
+  {
+    basename: "/assignment_expense_report/",
+  }
+);
+
+export default router;

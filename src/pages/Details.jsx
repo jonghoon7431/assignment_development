@@ -1,58 +1,85 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { deleteData, editData } from "../redux/slices/formSlice";
+import { queryClient } from "../QueryClientSetUp";
+import { deleteExpense, getExpense, putExpense } from "../api/expense";
 
 const Details = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const params = useParams();
-  const paramsId = params.id;
+  const userId = useSelector((state) => state.user.id);
+  const { id } = useParams();
 
-  const data = useSelector((state) => state.data);
-  const detailData = data.find((data) => data.id === paramsId);
+  const {
+    data: targetExpense = [],
+    isLoading,
+    error,
+  } = useQuery({ queryKey: ["expenses", id], queryFn: getExpense });
 
-  //삭제
-  const deleteList = () => {
-    if (!confirm("정말 이 항목을 삭제하시겠습니까?")) return;
-    dispatch(deleteData(detailData));
-    alert("삭제되었습니다");
-    navigate("/");
-  };
+  const [date, setDate] = useState("");
+  const [item, setItem] = useState("");
+  const [amount, setAmount] = useState("");
+  const [description, setDescription] = useState("");
+
+  useEffect(() => {
+    if (targetExpense) {
+      setDate(targetExpense.date);
+      setItem(targetExpense.item);
+      setAmount(targetExpense.amount);
+      setDescription(targetExpense.description);
+    }
+  }, [targetExpense]);
+
+  const mutationEdit = useMutation({
+    mutationFn: putExpense,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["expenses"]);
+      navigate("/");
+    },
+  });
+
+  const mutationDelete = useMutation({
+    mutationFn: deleteExpense,
+    onSuccess: () => {
+      navigate("/");
+    },
+  });
 
   //수정
-  const newData = {
-    id: detailData.id,
-    date: detailData.date,
-    item: detailData.item,
-    amount: detailData.amount,
-    description: detailData.description,
-  };
-  const [edit, setEdit] = useState(newData);
-
-  const { date, item, amount, description } = edit;
-
-  const onChangeHandler = (e) => {
-    setEdit({ ...edit, [e.target.name]: e.target.value });
-  };
-
-  const editDetailItem = () => {
+  const handleEdit = () => {
     //빈칸 입력시
-    if (!date.trim() || !item.trim() || !amount) return alert("날짜, 항목, 금액은 공백 입력이 불가합니다");
+    if (!date.trim() || !item.trim() || !amount)
+      return alert("날짜, 항목, 금액은 공백 입력이 불가합니다");
     //날짜 유효성검사 yyyy-mm-dd
-    const format = /^(19[7-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
-    if (!format.test(date)) return alert("유효한 날짜가 아닙니다. 날짜 형식 : YYYY-MM-YY");
+    const format =
+      /^(19[7-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+    if (!format.test(date))
+      return alert("유효한 날짜가 아닙니다. 날짜 형식 : YYYY-MM-YY");
     //금액이 음수나 0일 경우
     if (amount <= 0) return alert("입력 금액이 올바른지 확인해주세요");
 
+    mutationEdit.mutate({
+      id,
+      date,
+      item,
+      amount: +amount,
+      description,
+      createdBy: userId,
+    });
     alert("수정되었습니다");
-
-    dispatch(editData({ paramsId, edit }));
-    navigate("/");
   };
 
+  //삭제
+  const handleDelete = () => {
+    mutationDelete.mutate(id);
+    alert("삭제되었습니다");
+  };
+
+  if (isLoading) {
+    return <div>로딩중 ...</div>;
+  }
   return (
     <DetailDiv>
       <WrapContainer>
@@ -62,14 +89,20 @@ const Details = () => {
             type="text"
             value={date}
             name="date"
-            onChange={onChangeHandler}
+            onChange={(e) => setDate(e.target.value)}
             placeholder="YYYY-MM-DD"
             autoComplete="off"
           />
         </InputDiv>
         <InputDiv>
           <label>항목: </label>
-          <input type="text" value={item} name="item" onChange={onChangeHandler} placeholder="지출 항목" />
+          <input
+            type="text"
+            value={item}
+            name="item"
+            onChange={(e) => setItem(e.target.value)}
+            placeholder="지출 항목"
+          />
         </InputDiv>
         <InputDiv>
           <label>금액: </label>
@@ -77,7 +110,7 @@ const Details = () => {
             type="number"
             value={amount}
             name="amount"
-            onChange={onChangeHandler}
+            onChange={(e) => setAmount(e.target.value)}
             placeholder="금액"
             autoComplete="off"
           />
@@ -88,14 +121,14 @@ const Details = () => {
             type="text"
             value={description}
             name="description"
-            onChange={onChangeHandler}
+            onChange={(e) => setDescription(e.target.value)}
             placeholder="지출 내용"
             autoComplete="off"
           />
         </InputDiv>
         <ButtonDiv>
-          <EditButton onClick={editDetailItem}>수정</EditButton>
-          <DeleteButton onClick={deleteList}>삭제</DeleteButton>
+          <EditButton onClick={handleEdit}>수정</EditButton>
+          <DeleteButton onClick={handleDelete}>삭제</DeleteButton>
           <HomeButton onClick={() => navigate("/")}>뒤로가기</HomeButton>
         </ButtonDiv>
       </WrapContainer>
@@ -108,7 +141,6 @@ const DetailDiv = styled.div`
   height: auto;
   background-color: white;
   border-radius: 10px;
-  /* border: none; */
   margin: 20% auto;
   padding: 1rem;
 `;
