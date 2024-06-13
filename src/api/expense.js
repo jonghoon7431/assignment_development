@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const JSON_SERVER_URL = "http://localhost:5000";
+const JSON_SERVER_URL = "https://jet-gossamer-alpaca.glitch.me";
 
 export const getExpenses = async () => {
   try {
