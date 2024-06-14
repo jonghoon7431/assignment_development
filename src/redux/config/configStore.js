@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import MonthSlice from "../slices/monthSlice";
+import monthSlice from "../slices/monthSlice";
 import userSlice from "../slices/userSlice";
 
 const store = configureStore({
   reducer: {
-    activeMonth: MonthSlice,
+    activeMonth: monthSlice,
     user: userSlice,
   },
 });

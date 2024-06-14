@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://assignment-development-mfxw7zanm-jonghoons-projects.vercel.app",
   "scripts": {
     "dev": "vite",
     "build": "babel src -d lib",
