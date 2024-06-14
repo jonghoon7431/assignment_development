@@ -3,15 +3,15 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://jonghoon7431.github.io/assignment_expense_report/",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "babel src -d lib",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d dist",
-    "json": "json-server --watch db.json --port 5000"
+    "json": "json-server --watch db.json --port 5000",
+    "test": "jest"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.5",
