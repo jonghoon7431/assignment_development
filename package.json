@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://github.com/jonghoon7431/assignment_development/",
+  "homepage": "https://jonghoon7431.github.io/assignment_development/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
