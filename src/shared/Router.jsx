@@ -42,7 +42,7 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: "/assignment_development",
+    basename: "/assignment_development/",
   }
 );
 
