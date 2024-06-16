@@ -41,8 +41,9 @@ const Login = ({ setSignUpRender }) => {
           minLength="4"
           maxLength="15"
         />
-        <button className="border-2 p-2">로그인</button>
-        {/* TODO p-호버효과, 커서 포인터 */}
+        <button type="submit" className="border-2 p-2">
+          로그인
+        </button>
         <p onClick={() => setSignUpRender(true)}>회원가입하기</p>
       </form>
     </Section>

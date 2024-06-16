@@ -63,10 +63,11 @@ const SignUp = ({ setSignUpRender }) => {
           minLength="1"
           maxLength="10"
         />
-        <button className="border-2 p-2">회원가입</button>
+        <button className="border-2 p-2" type="submit">
+          회원가입
+        </button>
         <div className="flex flex-row">
           <p>가입된 아이디가 있나요? </p>
-          {/* TODO 호버효과, 커서 포인터 */}
           <p onClick={() => setSignUpRender(false)}>로그인하기</p>
         </div>
       </form>

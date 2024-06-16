@@ -68,7 +68,7 @@ const Form = () => {
         />
       </FormContainer>
 
-      <StFormButton>저장</StFormButton>
+      <StFormButton type="submit">저장</StFormButton>
     </WrapContainer>
   );
 };
